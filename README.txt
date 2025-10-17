@@ -2,8 +2,6 @@
 
 A full-stack healthcare application built with the MERN stack, demonstrating advanced security features like adaptive 2FA, continuous authentication via behavioral biometrics, role-based access control, and a real-time admin security dashboard.
 
-![HealthGuard Application Screenshot](path/to/your/screenshot.png)
-
 ## Key Security Features
 
 * **🔒 Adaptive Multi-Factor Authentication:** Prompts for 2FA only for new/untrusted devices or in response to suspicious behavior.
