@@ -1,0 +1,33 @@
+{
+  "name": "secure-health-auth-client",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/zxcvbn": "^4.4.5",
+    "@vitejs/plugin-react": "^5.0.4",
+    "axios": "^1.12.2",
+    "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.344.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-google-recaptcha": "^3.1.0",
+    "socket.io-client": "^4.8.1",
+    "zxcvbn": "^4.4.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-google-recaptcha": "^2.1.9",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.14",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.3"
+  }
+}
