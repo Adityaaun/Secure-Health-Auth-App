@@ -1,40 +1,56 @@
-HealthGuard — Secure Healthcare Authentication (Fresh Build)
+# HealthGuard — Secure Healthcare Authentication
 
-Stack
-- Backend: Node.js, Express, MongoDB (Mongoose), JWT, bcrypt, helmet, rate-limits, TOTP 2FA (speakeasy), QR (qrcode)
-- Frontend: React + Vite, minimal UI
-- Features: Register (doctor/patient), Login → CAPTCHA → (2FA if enabled) → Behavioral check → Role-based dashboard
+A full-stack healthcare application built with the MERN stack, demonstrating advanced security features like adaptive 2FA, continuous authentication via behavioral biometrics, role-based access control, and a real-time admin security dashboard.
 
-Run (Windows-friendly)
-1) Start MongoDB locally (mongodb://localhost:27017)
-2) Server
-   cd server
-   npm i
-   copy .env.example .env
-   npm run dev
-   -> http://localhost:4000/api/health
-3) Client
-   (new terminal)
-   cd client
-   npm i
-   npm run dev
-   -> http://localhost:5173
+![HealthGuard Application Screenshot](path/to/your/screenshot.png)
 
-Login flow
-- Client hits POST /api/auth/login with {email,password,captchaToken,behavior}
-- Server validates: password → CAPTCHA → 2FA (if enabled) → behavior
-- On success returns JWT + user (role doctor/patient)
+## Key Security Features
 
-Enable 2FA (after logging in / having token)
-- POST /api/2fa/setup   (Authorization: Bearer <token>) -> returns { qrDataUrl, tempSecret }
-- Scan QR in Google Authenticator
-- POST /api/2fa/enable  with { token } + Authorization header
-- Next login for that user will require the 6-digit code
+* **🔒 Adaptive Multi-Factor Authentication:** Prompts for 2FA only for new/untrusted devices or in response to suspicious behavior.
+* ** Biometric Session Monitoring:** Continuously authenticates a doctor's session by analyzing keyboard and mouse dynamics, locking the session if behavior deviates.
+* **🔑 Secure Registration & Login:** Enforces strong passwords and prevents the use of passwords exposed in known data breaches.
+* **👮 Real-Time Admin Dashboard:** Provides administrators with a live feed of security events, audit logs, and interactive controls to disable users or terminate sessions.
+* **🚨 Emergency "Break Glass" Access:** Allows doctors to access records of patients not under their direct care in emergencies, with every action logged for audit.
 
-Security defaults
-- helmet, rate limiting, strong password hashing (bcrypt)
-- simple demo CAPTCHA (replace with Google reCAPTCHA by setting CAPTCHA_MODE=recaptcha and RECAPTCHA_SECRET)
-- basic behavior scoring (customize threshold in server/src/routes/auth.js)
+## Tech Stack
 
-Notes
-- This is a clean minimal baseline. You can harden further with HTTPS, CSRF for cookie sessions, and DB encryption-at-rest.
+* **Frontend:** React, TypeScript, Vite, Tailwind CSS
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB with Mongoose
+* **Real-time Communication:** Socket.IO
+* **Security Libraries:** bcrypt, JWT, Speakeasy (for 2FA)
+
+## Getting Started
+
+### Prerequisites
+
+* Node.js
+* MongoDB
+
+### Setup Instructions
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/Adityaaun/Secure-Health-Auth-App.git](https://github.com/Adityaaun/Secure-Health-Auth-App.git)
+    cd Secure-Health-Auth-App
+    ```
+
+2.  **Install server dependencies:**
+    ```bash
+    cd server
+    npm install
+    ```
+
+3.  **Install client dependencies:**
+    ```bash
+    cd ../client
+    npm install
+    ```
+
+4.  **Configure Environment Variables:**
+    * In the `server` directory, copy `server/.env.example` to `server/.env`.
+    * Fill in the required values (MongoDB URI, JWT Secret, etc.).
+
+5.  **Run the application:**
+    * To start the server, run `npm run dev` from the `server` directory.
+    * To start the client, run `npm run dev` from the `client` directory.
