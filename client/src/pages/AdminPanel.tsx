@@ -182,7 +182,7 @@ export default function AdminPanel({ user }: AdminPanelProps) {
       }
     })();
 
-    const socket: Socket = io('http://localhost:4000');
+    const socket: Socket = io(import.meta.env.VITE_API_URL || 'http://localhost:4000');
     
     socket.on('connect', () => {
       console.log('Connected to WebSocket server.');
