@@ -18,12 +18,15 @@ import passwordResetRoutes from './routes/passwordReset.js';
 
 dotenv.config();
 const app = express();
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
+const SERVER_URL = process.env.SERVER_URL || 'http://localhost:4000';
 
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"]
+    origin: CLIENT_URL,
+    methods: ['GET', 'POST'],
+    credentials: true
   }
 });
 
@@ -57,18 +60,18 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://www.google.com", "https://www.gstatic.com"],
+      scriptSrc: ["'self'", 'https://www.google.com', 'https://www.gstatic.com'],
       styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:"],
-      connectSrc: ["'self'", "http://localhost:4000"],
-      frameSrc: ["'self'", "https://www.google.com"],
+      imgSrc: ["'self'", 'data:'],
+      connectSrc: ["'self'", CLIENT_URL, SERVER_URL, 'https://www.google.com'],
+      frameSrc: ["'self'", 'https://www.google.com'],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
     },
   },
 }));
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: CLIENT_URL, credentials: true }));
 app.use(express.json({ limit: '1mb' }));
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
